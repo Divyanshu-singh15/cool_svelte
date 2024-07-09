@@ -1,11 +1,12 @@
 <script lang="ts">
   import Table from "$lib/Table.svelte";
+  import type { PageData, ActionData } from './$types';
 
-  /** @type {import('./$types').PageData} */
+  /** @type {PageData} */
   export let data;
   console.log("hello", data.names);
 
-  /** @type {import('./$types').ActionData} */
+  /** @type {ActionData} */
   export let form;
 </script>
 

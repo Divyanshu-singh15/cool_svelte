@@ -1,13 +1,12 @@
 <script lang="ts">
+  /** @type {import('./$types').ActionData} */
+  export let form;
+  let unlockbutton = false;
+  if (form?.deploysuccess === true){
+    unlockbutton = true;
+  }
+</script>
 
-    /** @type {import('./$types').ActionData} */
-    export let form;
-    let unlockbutton = false;
-    if (form.deploysuccess === true){
-      unlockbutton = true
-    }
-    
-  </script>
   
 
 
