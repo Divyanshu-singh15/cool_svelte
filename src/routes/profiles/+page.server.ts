@@ -1,4 +1,5 @@
 // import { error } from '@sveltejs/kit';
+import type { RequestHandler, RequestEvent } from '@sveltejs/kit';
 import { createPool, sql } from '@vercel/postgres'
 import { POSTGRES_URL } from '$env/static/private'
 
@@ -64,14 +65,18 @@ async function seed() {
 /** @type {import('./$types').Actions} */
 export const actions = {
 	
-  update: async ({ request }) => {
-    const data = await request.formData();
+  update: async (event: RequestEvent) => {
+    const data = await event.request.formData();
     const db = createPool({ connectionString: POSTGRES_URL })
     const client = await db.connect();
 
     const email = data.get('email');
 		const name = data.get('name');
     const id = data.get('id');
+
+    if (typeof email !== 'string' || typeof name !== 'string' || typeof id !== 'string') {
+      return { success: false, error: 'Invalid form data' };
+    }
 
     const updateUser = await client.sql`
     UPDATE names
@@ -81,12 +86,12 @@ export const actions = {
 		return { success: true };
 	},
 
-  delete: async ({ request }) => {
-    const data = await request.formData();
+  delete: async (event: RequestEvent) => {
+    const data = await event.request.formData();
     const db = createPool({ connectionString: POSTGRES_URL })
     const client = await db.connect();
 
-    const id = data.get('id');
+    const id = Number(data.get('id'));
 
     const deleteUser = await client.sql`
     DELETE FROM names
@@ -95,13 +100,13 @@ export const actions = {
 		return { success: true };
 	},
 
-	create: async ({request}) => {
-		const data = await request.formData();
+	create: async (event: RequestEvent) => {
+		const data = await event.request.formData();
     const db = createPool({ connectionString: POSTGRES_URL })
     const client = await db.connect();
 
-    const email = data.get('email');
-		const name = data.get('name');
+    const email = data.get('email')?.toString();
+		const name = data.get('name')?.toString();
 
     const createUser = await client.sql`
       INSERT INTO names (name, email)
