@@ -4,7 +4,6 @@
     "src/contracts/**/*.ts"
   ],
   "compilerOptions": {
-    "noEmit": true,
     "experimentalDecorators": true,
     "target": "ESNext",
     "esModuleInterop": true
