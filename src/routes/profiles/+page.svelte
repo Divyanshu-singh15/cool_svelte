@@ -4,7 +4,7 @@
 
   /** @type {PageData} */
   export let data;
-  console.log("hello", data.names);
+  console.log("hello0", data.names);
 
   /** @type {ActionData} */
   export let form;
