@@ -8,7 +8,7 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "prebuild": "npm run clean",
-    "build": "tsc",
+    "build": "vite build",
     "deploy": "npx ts-node ./deploy.ts",
     "deploy-root": "npx ts-node ./deploy-root.ts",
     "deploy-multiple": "npx ts-node ./deploy-multiple.ts",
