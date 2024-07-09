@@ -25,7 +25,7 @@ export async function load() {
 }
 
 async function seed() {
-  const db = createPool({ connectionString: POSTGRES_URL })
+  const db = createPool({ connectionString: process.env.POSTGRES_URL })
   const client = await db.connect();
   const createTable = await client.sql`CREATE TABLE IF NOT EXISTS names (
       id SERIAL PRIMARY KEY,
@@ -67,7 +67,7 @@ export const actions = {
 	
   update: async (event: RequestEvent) => {
     const data = await event.request.formData();
-    const db = createPool({ connectionString: POSTGRES_URL })
+    const db = createPool({ connectionString: process.env.POSTGRES_URL })
     const client = await db.connect();
 
     const email = data.get('email');
@@ -88,7 +88,7 @@ export const actions = {
 
   delete: async (event: RequestEvent) => {
     const data = await event.request.formData();
-    const db = createPool({ connectionString: POSTGRES_URL })
+    const db = createPool({ connectionString: process.env.POSTGRES_URL })
     const client = await db.connect();
 
     const id = Number(data.get('id'));
@@ -102,7 +102,7 @@ export const actions = {
 
 	create: async (event: RequestEvent) => {
 		const data = await event.request.formData();
-    const db = createPool({ connectionString: POSTGRES_URL })
+    const db = createPool({ connectionString: process.env.POSTGRES_URL })
     const client = await db.connect();
 
     const email = data.get('email')?.toString();
