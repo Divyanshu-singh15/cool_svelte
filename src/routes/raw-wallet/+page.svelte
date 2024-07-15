@@ -7,9 +7,7 @@
   function createKeys() {
     const privKey = PrivateKey.fromRandom();
     WIF = privKey.toWif();
-    console.log("Private Key WIF format is ", WIF);
     address = privKey.toAddress();
-    console.log("Your bitcoin address is ", address);
   }
 </script>
 
